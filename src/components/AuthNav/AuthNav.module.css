@@ -1,7 +1,7 @@
-.navMenu {
+.regMenu {
   display: flex;
   list-style: none;
-  width: 120px;
+  width: 135px;
   justify-content: space-between;
 }
 

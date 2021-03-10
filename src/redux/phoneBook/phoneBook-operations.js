@@ -11,9 +11,6 @@ import {
     fetchContactError,
 } from "./phoneBook-actions";
 
-//axios.defaults.baseURL = 'http://localhost:4040';
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com/';
-
 const fetchContacts = () => async dispatch => {
     dispatch(fetchContactRequest());
     
@@ -21,7 +18,7 @@ const fetchContacts = () => async dispatch => {
         const { data } = await axios.get('/contacts');
         dispatch(fetchContactSuccess(data));
     } catch (error) {
-        dispatch(fetchContactError(error));
+        dispatch(fetchContactError(error.massage));
     }
 };
 
@@ -33,7 +30,7 @@ const addContact = ({ name, number }) => async dispatch => {
         const { data } = await axios.post('/contacts', contact);
         dispatch(addContactSuccess(data));
     } catch (error) {
-        dispatch(addContactError(error));
+        dispatch(addContactError(error.massage));
     }
 };
 
@@ -44,7 +41,7 @@ const deleteContact = contactId => async dispatch => {
        await axios.delete(`/contacts/${contactId}`);
         dispatch(deleteContactSuccess(contactId))
     }  catch (error) {
-        dispatch(deleteContactError(error));
+        dispatch(deleteContactError(error.massage));
     }
 };
 

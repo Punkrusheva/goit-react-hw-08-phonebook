@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Navigation from '../Navigation/Navigation';
+import AppBar from '../AppBar/AppBar';
 import styles from './Layout.module.css';
 
-function Layout({ children}) {
+function Layout({children}) {
   return (
     <div className={styles.layout} >
-      <Navigation />
-      <hr/>
+      <AppBar />
         {children}
     </div>
   )

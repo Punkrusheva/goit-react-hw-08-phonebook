@@ -24,13 +24,13 @@ function ContactListItem({ name, id, number, onClick}) {
 ContactListItem.defaultProps = {
   number: '',
   name: '',
-  id: ''
+  id: null,
 };
 
 ContactListItem.propTypes = {
   number: PropTypes.string,
   name: PropTypes.string,
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
 };
 
 export default ContactListItem;
