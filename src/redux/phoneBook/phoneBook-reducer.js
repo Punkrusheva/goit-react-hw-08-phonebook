@@ -39,7 +39,7 @@ const loading = createReducer(false, {
 });
 
 const error = createReducer('', {
-    [fetchContactError]: () => 'Ошибка доcтупа к данным!',
+    [fetchContactError]: () => 'Ошибка доcтупа к данным! Авторизируйся!',
     [addContactError]: () => 'Ошибка добавления контакта!',
     [deleteContactError]: () => 'Ошибка удаления контакта!',
 });

@@ -21,7 +21,7 @@ class Phonebook extends Component {
         <ContactFilter/>
         <ToastContainer autoClose={2500} />
         {this.props.isLoadingContacts && <h1>Загружаю...</h1>}
-        {/* {this.props.isErrorContacts && alert(`${this.props.isErrorContacts}`)}*/}
+        {this.props.isErrorContacts && alert(`${this.props.isErrorContacts}`)}
         <ContactList />
       </Layout>
     );

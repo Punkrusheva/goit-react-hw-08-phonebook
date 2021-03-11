@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.4",
@@ -24,13 +25,12 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"npm run api-server\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "netlify deploy -p",
-    "api-server": "json-server --watch db.json --port 4040 --delay 300"
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [

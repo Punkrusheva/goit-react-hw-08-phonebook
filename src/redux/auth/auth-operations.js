@@ -67,7 +67,7 @@ const {
     try {
         const response = await axios.get('/users/current');
 
-       // dispatch(authActions.getCurrentUserSuccess());
+        dispatch(authActions.getCurrentUserSuccess(response.data));
     } catch (error) {
         dispatch(authActions.getCurrentUserError(error.massage));
     }
