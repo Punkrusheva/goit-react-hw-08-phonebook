@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { authSelectors, authOperations } from '../../redux/auth';
 import styles from "./UserMenu.module.css";
 
-const UserMenu = ({ email, onLogout }) => (
+const UserMenu = ({ name, onLogout }) => (
   <div className={styles.container}>
-    <span className={styles.email}>Welcome, {email}</span>
+    <span className={styles.name}>Welcome, {name}</span>
     <button type="button" onClick={onLogout}>
       Logout
     </button>
@@ -13,7 +13,7 @@ const UserMenu = ({ email, onLogout }) => (
 );
 
 const mapStateToProps = state => ({
-  email: authSelectors.getUserEmail(state),
+  name: authSelectors.getUserName(state),
 });
 
 const mapDispatchToProps = {
