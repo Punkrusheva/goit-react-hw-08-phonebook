@@ -5,6 +5,7 @@ import routes from "../../routes";
 import { connect } from 'react-redux';
 import { authSelectors } from '../../redux/auth';
 
+
 const Navigation = ({ isAuthenticated }) => (
   <ul className={styles.navMenu}>
     <li className={styles.headerMenuItem}>

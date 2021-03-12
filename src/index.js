@@ -9,13 +9,12 @@ import './stylesheets/main.css';
 import './stylesheets/normalize.css';
 
 ReactDOM.render(
-  <Provider store={store.store}>
-    <PersistGate loading={null} persistor={store.persistor}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </PersistGate>
-  </Provider>
-  ,
+    <Provider store={store.store}>
+      <PersistGate loading={null} persistor={store.persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>,
   document.getElementById('root'),
 );

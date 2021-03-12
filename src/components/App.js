@@ -1,6 +1,6 @@
 import React, { Component, Suspense, lazy } from "react";
 import Layout from "./Layout/Layout";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 import routes from "../routes";
 import { authOperations } from "../redux/auth";
 import { connect } from 'react-redux';
@@ -40,7 +40,7 @@ class App extends Component {
             <Redirect to={routes.homePage}/>
           </Switch>
         </Suspense>
-      </Layout>
+        </Layout>
     )
   }
 };
