@@ -16,7 +16,6 @@ class Phonebook extends Component {
   }
 
   render() {
-        console.log(this.props.isErrorContacts);
     return (
       <Layout >
         <ContactForm/>

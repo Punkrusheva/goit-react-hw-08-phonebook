@@ -33,7 +33,6 @@ class Login extends Component {
     };
 
     render() {
-        console.log(this.props.isErrorAuth);
         return (
             <>
             <h1>Login</h1>

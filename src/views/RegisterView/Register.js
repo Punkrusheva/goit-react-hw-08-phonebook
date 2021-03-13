@@ -36,7 +36,6 @@ class Register extends Component {
         };
     
     render() {
-        console.log(this.props.isErrorAuth);
             return (
                 <>
                     <h1>Registration</h1>
