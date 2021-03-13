@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authOperations }  from '../../redux/auth';
-//import Load from "../../components/Loader/Loader";
+import Load from "../../components/Loader/Loader";
 import styles from "./Login.module.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { authSelectors } from "../../redux/auth";
 
 class Login extends Component {
- /*  state = {
-       loading: false,
-       error: null,
-    };*/
     state = {
     email: '',
     password: '',
@@ -18,20 +17,26 @@ class Login extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+    handleSubmit = e => {
+        e.preventDefault();
+      
+        const { email, password } = this.state;
+        if (email === '') { toast.error('Email is empty'); }
+        else {
+            if (password.length < 7) { toast.error('Wrong password'); }
+            else {
+                this.props.onLogin(this.state);
 
-    this.props.onLogin(this.state);
-
-    this.setState({ name: '', email: '', password: '' });
-  };
+                this.setState({ name: '', email: '', password: '' });
+            };
+        };
+    };
 
     render() {
-       //const {error} = this.state;
+        console.log(this.props.isErrorAuth);
         return (
             <>
             <h1>Login</h1>
-            
                 <form className={styles.box} onSubmit={this.handleSubmit} >
                     <label htmlFor={this.emailInputId} className={styles.email}>
                         E-mail
@@ -61,24 +66,27 @@ class Login extends Component {
                         Sign in
                     </button>
                 </form>
-                
-                {/*{error && <h1>Error, try again later {error.message}</h1>}*/}
-                
+                {this.props.isLoadingAuth &&
+                        <Load
+                            type="ThreeDots"
+                            color="#3f51b5"
+                            height={45}
+                            width={45}
+                            timeout={6000}
+                        />}
+                    {this.props.isErrorAuth && alert(`${this.props.isErrorAuth}`)}
             </>
         )
     };
 }
 
+const mapStateToProps = state => ({
+    isLoadingAuth: authSelectors.getAuthLoading(state),
+    isErrorAuth: authSelectors.getAuthError(state),
+});
+
 const mapDispatchToProps = {
   onLogin: authOperations.logIn,
 };
 
-export default connect(null, mapDispatchToProps)(Login);
-/** {this.state.loading &&
-                    <Load
-                        type="ThreeDots"
-                        color="#3f51b5"
-                        height={45}
-                        width={45}
-                        timeout={6000}
-                    />} */
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

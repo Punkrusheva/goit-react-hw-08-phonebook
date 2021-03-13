@@ -2,10 +2,12 @@ import React, { Component, Suspense, lazy } from "react";
 import Layout from "./Layout/Layout";
 import { Switch, Redirect } from "react-router-dom";
 import routes from "../routes";
+import Load from "./Loader/Loader";
 import { authOperations } from "../redux/auth";
 import { connect } from 'react-redux';
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import { ToastContainer } from "react-toastify";
 
 const HomePage = lazy(() => import('../views/HomeView/HomePage.js' /*webpackChunkName: 'home-page' */));
 const PhoneBook = lazy(() => import('../views/PhoneBookView/PhoneBook.js' /*webpackChunkName: 'phone-book' */));
@@ -20,7 +22,14 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Suspense fallback={<h1>Загружаем...</h1>}>
+        <ToastContainer autoClose={2500} />
+        <Suspense fallback={<Load
+                        type="ThreeDots"
+                        color="#3f51b5"
+                        height={45}
+                        width={45}
+                        timeout={6000}
+                    />}>
           <Switch>
             <PublicRoute exact path={routes.homePage} component={HomePage} />
             <PrivateRoute

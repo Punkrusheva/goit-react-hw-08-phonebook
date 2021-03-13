@@ -22,7 +22,7 @@ const register = credentials => async dispatch => {
         token.set(response.data.token);
         dispatch(authActions.registerSuccess(response.data));
     } catch (error) {
-        dispatch(authActions.registerError(error.massage));
+        dispatch(authActions.registerError(error));
     }
  };
 
@@ -35,7 +35,7 @@ const logIn = credentials => async dispatch => {
         token.set(response.data.token);
         dispatch(authActions.loginSuccess(response.data));
     } catch (error) {
-        dispatch(authActions.loginError(error.massage));
+        dispatch(authActions.loginError(error));
     }
  };
 
@@ -48,7 +48,7 @@ const logOut = () => async dispatch => {
         token.unset();
         dispatch(authActions.logoutSuccess());
     } catch (error) {
-        dispatch(authActions.logoutError(error.massage));
+        dispatch(authActions.logoutError(error));
     }
  };
 
@@ -69,7 +69,7 @@ const {
 
         dispatch(authActions.getCurrentUserSuccess(response.data));
     } catch (error) {
-        dispatch(authActions.getCurrentUserError(error.massage));
+        dispatch(authActions.getCurrentUserError(error));
     }
  };
 
