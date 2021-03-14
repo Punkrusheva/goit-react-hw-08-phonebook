@@ -1,47 +1,37 @@
 import axios from "axios";
-import {
-    addContactRequest,
-    addContactSuccess,
-    addContactError,
-    deleteContactRequest,
-    deleteContactSuccess,
-    deleteContactError,
-    fetchContactRequest,
-    fetchContactSuccess,
-    fetchContactError,
-} from "./phoneBook-actions";
+import contactsActions from "./phoneBook-actions";
 
 const fetchContacts = () => async dispatch => {
-    dispatch(fetchContactRequest());
+    dispatch(contactsActions.fetchContactRequest());
     
     try {
         const { data } = await axios.get('/contacts');
-        dispatch(fetchContactSuccess(data));
+        dispatch(contactsActions.fetchContactSuccess(data));
     } catch (error) {
-        dispatch(fetchContactError(error.massage));
+        dispatch(contactsActions.fetchContactError(error.massage));
     }
 };
 
 const addContact = ({ name, number }) => async dispatch => {
-    dispatch(addContactRequest());
+    dispatch(contactsActions.addContactRequest());
 
     try {
         const contact = {name, number};
         const { data } = await axios.post('/contacts', contact);
-        dispatch(addContactSuccess(data));
+        dispatch(contactsActions.addContactSuccess(data));
     } catch (error) {
-        dispatch(addContactError(error.massage));
+        dispatch(contactsActions.addContactError(error.massage));
     }
 };
 
 const deleteContact = contactId => async dispatch => {
-    dispatch(deleteContactRequest());
+    dispatch(contactsActions.deleteContactRequest());
 
     try {
        await axios.delete(`/contacts/${contactId}`);
-        dispatch(deleteContactSuccess(contactId))
+        dispatch(contactsActions.deleteContactSuccess(contactId))
     }  catch (error) {
-        dispatch(deleteContactError(error.massage));
+        dispatch(contactsActions.deleteContactError(error.massage));
     }
 };
 

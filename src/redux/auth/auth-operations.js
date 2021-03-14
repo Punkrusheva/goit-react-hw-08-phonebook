@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { unstable_concurrentAct } from 'react-dom/test-utils';
 import authActions from './auth-actions';
 
 axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com/';
@@ -22,7 +21,7 @@ const register = credentials => async dispatch => {
         token.set(response.data.token);
         dispatch(authActions.registerSuccess(response.data));
     } catch (error) {
-        dispatch(authActions.registerError(error));
+        dispatch(authActions.registerError(error.massage));
     }
  };
 
@@ -35,7 +34,7 @@ const logIn = credentials => async dispatch => {
         token.set(response.data.token);
         dispatch(authActions.loginSuccess(response.data));
     } catch (error) {
-        dispatch(authActions.loginError(error));
+        dispatch(authActions.loginError(error.massage));
     }
  };
 
@@ -48,7 +47,7 @@ const logOut = () => async dispatch => {
         token.unset();
         dispatch(authActions.logoutSuccess());
     } catch (error) {
-        dispatch(authActions.logoutError(error));
+        dispatch(authActions.logoutError(error.massage));
     }
  };
 
@@ -69,7 +68,7 @@ const {
 
         dispatch(authActions.getCurrentUserSuccess(response.data));
     } catch (error) {
-        dispatch(authActions.getCurrentUserError(error));
+        dispatch(authActions.getCurrentUserError(error.massage));
     }
  };
 

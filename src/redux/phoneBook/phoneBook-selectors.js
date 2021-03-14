@@ -15,5 +15,8 @@ const getVisibleContacts = createSelector([getAllContacts, getFilter,], (contact
 const getError = state => state.contacts.error;
 
 export default {
-    getLoading, getFilter, getVisibleContacts, getError
+  getLoading,
+  getFilter,
+  getVisibleContacts,
+  getError
 };

@@ -16,6 +16,8 @@ const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
 const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
 const getCurrentUserError = createAction('auth/getCurrentUserError');
 
+const clearAuthError = createAction('contacts/clearError');
+
 export default {
   registerRequest,
   registerSuccess,
@@ -29,4 +31,5 @@ export default {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
+  clearAuthError
 };

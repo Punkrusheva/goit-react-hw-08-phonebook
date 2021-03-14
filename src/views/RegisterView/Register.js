@@ -6,14 +6,15 @@ import styles from "./Register.module.css";
 import { authSelectors } from "../../redux/auth";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthNotification from '../../components/AuthNotification/AuthNotification';
 
 class Register extends Component {
     state = {
     name: '',
     email: '',
     password: '',
-  };
-
+    };
+    
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
@@ -32,8 +33,9 @@ class Register extends Component {
                         this.setState({ name: '', email: '', password: '' });
                     };
                 };
-            };
         };
+        
+    };
     
     render() {
             return (
@@ -88,7 +90,7 @@ class Register extends Component {
                             width={45}
                             timeout={6000}
                         />}
-                    {this.props.isErrorAuth && alert(`${this.props.isErrorAuth}`)}
+                    {this.props.errorReg &&  <AuthNotification/>}
                 </>
             )
         };
@@ -96,11 +98,11 @@ class Register extends Component {
 
 const mapStateToProps = state => ({
     isLoadingAuth: authSelectors.getAuthLoading(state),
-    isErrorAuth: authSelectors.getAuthError(state),
+    errorReg: authSelectors.getAuthError(state),
 });
 
 const mapDispatchToProps = {
-  onRegister: authOperations.register,
+    onRegister: authOperations.register,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

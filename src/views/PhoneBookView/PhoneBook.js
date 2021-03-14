@@ -8,9 +8,9 @@ import "../../stylesheets/animation.css";
 import Load from "../../components/Loader/Loader";
 import { ToastContainer } from "react-toastify";
 import { contactsOperations, contactsSelectors } from "../../redux/phoneBook";
+import Notification from '../../components/Notification/Notification';
 
 class Phonebook extends Component {
-
   componentDidMount() {
     this.props.fetchContacts();
   }
@@ -19,7 +19,8 @@ class Phonebook extends Component {
     return (
       <Layout >
         <ContactForm/>
-        <ContactFilter/>
+        <ContactFilter />
+        
         <ToastContainer autoClose={2500} />
         {this.props.isLoadingContacts && <Load
                         type="ThreeDots"
@@ -27,8 +28,12 @@ class Phonebook extends Component {
                         height={45}
                         width={45}
                         timeout={6000}
-                    />}
-        {this.props.isErrorContacts && alert(`${this.props.isErrorContacts}`)}
+        />}
+        
+        {this.props.error &&
+                    <Notification
+            message={`ERROR: ${this.props.error.message}.`} />}
+        
         <ContactList />
       </Layout>
     );
@@ -37,7 +42,7 @@ class Phonebook extends Component {
 
 const mapStateToProps = state => ({
   isLoadingContacts: contactsSelectors.getLoading(state),
-  isErrorContacts: contactsSelectors.getError(state),
+  error: contactsSelectors.getError(state),
 })
 
 const mapDispatchToProps = dispatch => ({

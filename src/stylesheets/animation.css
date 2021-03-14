@@ -30,7 +30,7 @@
 }
 
 /* Alert */
-
+/*
 .alert-enter {
   transform: translateX(100%);
 }
@@ -48,7 +48,7 @@
   transform: translateX(100%);
   transition: transform 250ms linear;
 }
-
+*/
 /* Анимация фильтра (для тренеровки)*/
 
 .filter-enter {

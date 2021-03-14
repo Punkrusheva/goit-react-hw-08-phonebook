@@ -3,24 +3,25 @@ import { connect } from 'react-redux';
 import { authOperations }  from '../../redux/auth';
 import Load from "../../components/Loader/Loader";
 import styles from "./Login.module.css";
+import { authSelectors } from "../../redux/auth";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { authSelectors } from "../../redux/auth";
+import AuthNotification from '../../components/AuthNotification/AuthNotification';
 
 class Login extends Component {
     state = {
     email: '',
     password: '',
-  };
+    };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  };
+    handleChange = ({ target: { name, value } }) => {
+       this.setState({ [name]: value });
+    };
 
     handleSubmit = e => {
         e.preventDefault();
-      
         const { email, password } = this.state;
+
         if (email === '') { toast.error('Email is empty'); }
         else {
             if (password.length < 7) { toast.error('Wrong password'); }
@@ -72,16 +73,16 @@ class Login extends Component {
                             height={45}
                             width={45}
                             timeout={6000}
-                        />}
-                    {this.props.isErrorAuth && alert(`${this.props.isErrorAuth}`)}
+                    />}
+                {this.props.errorLog && <AuthNotification/>}
             </>
         )
     };
-}
+};
 
 const mapStateToProps = state => ({
     isLoadingAuth: authSelectors.getAuthLoading(state),
-    isErrorAuth: authSelectors.getAuthError(state),
+    errorLog: authSelectors.getAuthError(state),
 });
 
 const mapDispatchToProps = {

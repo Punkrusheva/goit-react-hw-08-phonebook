@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
-import authActions from "./auth-actions";
-import { authOperations } from ".";
+import { authActions } from "../auth";
 
-const initialUserState = { name: null, email: null };
+const initialUserState = { name: null, email: null};
 
 const user = createReducer(initialUserState, {
     [authActions.registerSuccess]: (_, { payload }) => payload.user,
@@ -36,14 +35,21 @@ const loading = createReducer(false, {
     [authActions.getCurrentUserError]: () => false,
 });
 
-const setError = (_, { payload }) => payload;
+const error = createReducer(null, {
+    [authActions.registerError]: () => 'Ошибка регистрации!',
+    [authActions.loginError]: () => 'Ошибка входа!',
+    [authActions.logoutError]: () => 'Ошибка выхода!',
+    [authActions.getCurrentUserError]: () => 'Ошибка получения текущего пользователя!',
+    [authActions.clearAuthError]: () => null,
+});
+/*const setError = (_, { payload }) => payload;
 
 const error = createReducer(null, {
     [authActions.registerError]: setError,
     [authActions.loginError]: setError,
     [authActions.logoutError]: setError,
-    [authActions.getCurrentUserError]: setError,
-});
+    [authActions.getCurrentUserError]: setError
+});*/
 
 export default combineReducers({
     user,

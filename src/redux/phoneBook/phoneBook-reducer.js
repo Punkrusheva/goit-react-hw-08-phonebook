@@ -1,47 +1,37 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import {
-    addContactRequest,
-    addContactSuccess,
-    addContactError,
-    deleteContactRequest,
-    deleteContactSuccess,
-    deleteContactError,
-    fetchContactRequest,
-    fetchContactSuccess,
-    fetchContactError,
-    changeFilter
-} from "./phoneBook-actions";
+import { contactsActions } from "../phoneBook";
 
 const items = createReducer([], {
-    [fetchContactSuccess]: (_, { payload }) => payload,
-    [addContactSuccess]: (state, { payload }) => [payload, ...state],
+    [contactsActions.fetchContactSuccess]: (_, { payload }) => payload,
+    [contactsActions.addContactSuccess]: (state, { payload }) => [payload, ...state],
 
-    [deleteContactSuccess]: (state, { payload }) => state.filter(({ id }) => id !== payload)
+    [contactsActions.deleteContactSuccess]: (state, { payload }) => state.filter(({ id }) => id !== payload)
 });
 
 const filter = createReducer('', {
-    [changeFilter]: (_, { payload }) => payload,
+    [contactsActions.changeFilter]: (_, { payload }) => payload,
 });
 
 const loading = createReducer(false, {
-    [fetchContactRequest]: () => true,
-    [fetchContactSuccess]: () => false,
-    [fetchContactError]: () => false,
+    [contactsActions.fetchContactRequest]: () => true,
+    [contactsActions.fetchContactSuccess]: () => false,
+    [contactsActions.fetchContactError]: () => false,
 
-    [addContactRequest]: () => true,
-    [addContactSuccess]: () => false,
-    [addContactError]: () => false,
+    [contactsActions.addContactRequest]: () => true,
+    [contactsActions.addContactSuccess]: () => false,
+    [contactsActions.addContactError]: () => false,
     
-    [deleteContactRequest]: () => true,
-    [deleteContactSuccess]: () => false,
-    [deleteContactError]: () => false,
+    [contactsActions.deleteContactRequest]: () => true,
+    [contactsActions.deleteContactSuccess]: () => false,
+    [contactsActions.deleteContactError]: () => false,
 });
 
 const error = createReducer('', {
-    [fetchContactError]: () => 'Ошибка доcтупа к данным! Авторизируйся!',
-    [addContactError]: () => 'Ошибка добавления контакта!',
-    [deleteContactError]: () => 'Ошибка удаления контакта!',
+    [contactsActions.fetchContactError]: () => 'Ошибка доcтупа к данным! Авторизируйся!',
+    [contactsActions.addContactError]: () => 'Ошибка добавления контакта!',
+    [contactsActions.deleteContactError]: () => 'Ошибка удаления контакта!',
+    [contactsActions.clearContactError]: () => '',
 });
 
 export default combineReducers({
